@@ -1,0 +1,19 @@
+{
+    "name": "mwakalingajohn/laravel-auto-migrations",
+    "description": "Create migrations automatically",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Mwakalinga",
+            "email": "mwakalingajohn@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MwakalingaJohn\\LaravelAutoMigration":"src/"
+        }
+    }
+}
