@@ -1,6 +1,6 @@
 <?php
 
-namespace MwakalingaJohn\LaravelAutoMigrations;
+namespace MwakalingaJohn\LaravelAutoMigrations\Manager;
 
 class ModelColumnManager{
 
@@ -335,9 +335,12 @@ class ModelColumnManager{
     /**
      * string
      */
-    public function string()
+    public function string(int $size=100)
     {
-
+        return (object)[
+            "type"=>"string",
+            "size"=>$size
+        ];
     }
 
     /**

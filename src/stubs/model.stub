@@ -3,15 +3,18 @@
 namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use MwakalingaJohn\LaravelAutoMigrations\ModelManager as Model;
+use MwakalingaJohn\LaravelAutoMigrations\Manager\ModelManager as Model;
 use MwakalingaJohn\LaravelAutoMigrations\Facades\ModelColumn;
 
 class {{ class }} extends Model
 {
     use HasFactory;
 
-    protected $properties = [
-        // "id"=> ModelColumn::string("name")
-    ];
+    protected function columns()
+    {
+        return [
+            // "id"=> ModelColumn::string("name")
+        ];
+    }
 }
 
