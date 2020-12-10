@@ -19,7 +19,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MwakalingaJohn\\LaravelAutoMigration\\LaravelAutoMigrationServiceProvider"
+                "MwakalingaJohn\\LaravelAutoMigration\\LaravelAutoMigrationsServiceProvider"
             ]
         }
     }
