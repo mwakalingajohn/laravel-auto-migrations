@@ -13,13 +13,13 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "MwakalingaJohn\\LaravelAutoMigration\\":"src/"
+            "MwakalingaJohn\\LaravelAutoMigrations\\":"src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "MwakalingaJohn\\LaravelAutoMigration\\LaravelAutoMigrationsServiceProvider"
+                "MwakalingaJohn\\LaravelAutoMigrations\\LaravelAutoMigrationsServiceProvider"
             ]
         }
     }
