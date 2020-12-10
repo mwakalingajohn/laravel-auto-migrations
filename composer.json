@@ -1,6 +1,6 @@
 {
     "name": "mwakalingajohn/laravel-auto-migrations",
-    "description": "Create migrations automatically",
+    "description": "Laravel migration implemented as django migrations",
     "type": "library",
     "license": "MIT",
     "authors": [
