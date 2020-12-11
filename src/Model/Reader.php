@@ -16,7 +16,7 @@ class Reader extends BaseReader
 
         $files = $this->fileNames($directory);
 
-        return $files
+        return collect($files)
             ->map(function ($file) {
                 return $this->resolve($this->getName($file));
             })

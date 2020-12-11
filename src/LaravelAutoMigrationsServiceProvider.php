@@ -9,6 +9,7 @@ use MwakalingaJohn\LaravelAutoMigrations\Commands\MakeModelCommand;
 use MwakalingaJohn\LaravelAutoMigrations\Manager\ModelColumnManager;
 use MwakalingaJohn\LaravelAutoMigrations\Migration\ChangeDetector;
 use MwakalingaJohn\LaravelAutoMigrations\Migration\Handler;
+use MwakalingaJohn\LaravelAutoMigrations\Migration\Parser;
 use MwakalingaJohn\LaravelAutoMigrations\Migration\Reader as MigrationReader;
 use MwakalingaJohn\LaravelAutoMigrations\Migration\Writer;
 use MwakalingaJohn\LaravelAutoMigrations\Model\Reader as ModelReader;
@@ -49,7 +50,7 @@ class LaravelAutoMigrationsServiceProvider extends ServiceProvider
             return new MakeMigrationCommand($creator, $composer);
         });
         $this->app->bind(Handler::class,function(){
-            return new Handler(new MigrationReader(new Filesystem), new ModelReader, new Writer, new ChangeDetector);
+            return new Handler(new MigrationReader(new Filesystem, new Parser), new ModelReader, new Writer, new ChangeDetector);
         });
     }
 

@@ -5,6 +5,7 @@ namespace MwakalingaJohn\LaravelAutoMigrations\Migration;
 use Illuminate\Filesystem\Filesystem;
 use MwakalingaJohn\LaravelAutoMigrations\BaseReader;
 use Illuminate\Support\Str;
+use MwakalingaJohn\LaravelAutoMigrations\Migration\Parser;
 
 class Reader extends BaseReader
 {
@@ -24,12 +25,18 @@ class Reader extends BaseReader
     private bool $useClassInstances = false;
 
     /**
+     * Migration parser
+     */
+    private Parser $parser;
+
+    /**
      * Just learned laravel migrations have no namespace, hence need to
      * be required at runtime using the Filesystem
      */
-    public function __construct(Filesystem $files)
+    public function __construct(Filesystem $files, Parser $parser)
     {
         $this->files = $files;
+        $this->parser = $parser;
     }
 
     /**
@@ -38,7 +45,7 @@ class Reader extends BaseReader
     public function get()
     {
         $migrations = $this->getMigrations();
-        dump($migrations);
+        return $this->parser->parse($migrations);
     }
 
     /**

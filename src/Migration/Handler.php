@@ -37,11 +37,17 @@ class Handler{
      */
     private ChangeDetector $changeDector;
 
-    public function __construct(MigrationReader $migrationReader, ModelReader $modelReader, Writer $writer, ChangeDetector $changeDector) {
+    public function __construct(
+        MigrationReader $migrationReader,
+        ModelReader $modelReader,
+        Writer $writer,
+        ChangeDetector $changeDector) {
+
         $this->migrationReader = $migrationReader;
         $this->modelReader = $modelReader;
         $this->changeDector = $changeDector;
         $this->writer = $writer;
+
     }
 
     /**
@@ -50,6 +56,7 @@ class Handler{
     public function readMigrations()
     {
         $this->migrationStore = $this->migrationReader->get();
+
     }
 
     /**

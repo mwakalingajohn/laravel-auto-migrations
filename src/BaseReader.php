@@ -15,7 +15,7 @@ abstract class BaseReader{
      */
     public function fileNames($directory)
     {
-        return collect(array_diff(scandir($directory), array('..', '.')));
+        return array_diff(scandir($directory), array('..', '.'));
     }
 
     /**

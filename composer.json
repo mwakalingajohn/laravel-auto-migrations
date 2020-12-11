@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "nikic/php-parser": "^4.9@dev"
+    },
     "autoload": {
         "psr-4": {
             "MwakalingaJohn\\LaravelAutoMigrations\\":"src/"
