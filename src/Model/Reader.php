@@ -5,6 +5,10 @@ namespace MwakalingaJohn\LaravelAutoMigrations\Model;
 use MwakalingaJohn\LaravelAutoMigrations\BaseReader;
 use MwakalingaJohn\LaravelAutoMigrations\Manager\ModelManager;
 
+/**
+ * TODO
+ * 1. Include table in the array
+ */
 class Reader extends BaseReader
 {
     /**

@@ -3,6 +3,7 @@
 namespace MwakalingaJohn\LaravelAutoMigrations\Migration;
 
 use Error;
+use Illuminate\Support\Facades\App;
 use PhpParser\NodeDumper;
 use PhpParser\ParserFactory;
 
@@ -23,8 +24,14 @@ class Parser{
      */
     private $store;
 
+    /**
+     * The AST to array converter
+     */
+    private AstToArrayConverter $converter;
+
     public function __construct() {
         $this->parser = $this->getParser();
+        $this->converter = $this->getConverter();
     }
 
     /**
@@ -42,10 +49,10 @@ class Parser{
      */
     public function parseFiles()
     {
-        dump($this->files);
-        $this->files->each(function($file){
-            $this->parseFile($file);
-        });
+        $this->parseFile($this->files->first());
+        // $this->files->each(function($file){
+        //     $this->parseFile($file);
+        // });
     }
 
     /**
@@ -56,6 +63,7 @@ class Parser{
         $ast = $this->getAST(
             $this->getContents($file)
         );
+        $this->converter->convert($ast);
     }
 
     /**
@@ -104,5 +112,12 @@ class Parser{
     public function getContents($file)
     {
         return file_get_contents($file);
+    }
+
+    /**
+     * Get the AstToArrayConverter
+     */
+    private function getConverter(){
+        return App::make(AstToArrayConverter::class);
     }
 }
