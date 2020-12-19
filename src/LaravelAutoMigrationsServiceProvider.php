@@ -4,20 +4,17 @@ namespace MwakalingaJohn\LaravelAutoMigrations;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
-use MwakalingaJohn\LaravelAutoMigrations\Commands\MakeMigrationCommand;
-use MwakalingaJohn\LaravelAutoMigrations\Commands\MakeModelCommand;
+use MwakalingaJohn\LaravelAutoMigrations\Commands\{MakeMigrationCommand, MakeModelCommand};
 use MwakalingaJohn\LaravelAutoMigrations\Manager\ModelColumnManager;
-use MwakalingaJohn\LaravelAutoMigrations\Migration\ChangeDetector;
-use MwakalingaJohn\LaravelAutoMigrations\Migration\Handler;
-use MwakalingaJohn\LaravelAutoMigrations\Migration\Parser;
-use MwakalingaJohn\LaravelAutoMigrations\Migration\Reader as MigrationReader;
-use MwakalingaJohn\LaravelAutoMigrations\Migration\Writer;
+use MwakalingaJohn\LaravelAutoMigrations\Migration\{Handler, Parser, Writer, Reader as MigrationReader, ChangeDetector};
 use MwakalingaJohn\LaravelAutoMigrations\Model\Reader as ModelReader;
 
 class LaravelAutoMigrationsServiceProvider extends ServiceProvider
 {
 
-    public function boot(){}
+    public function boot()
+    {
+    }
 
     public function register()
     {
@@ -49,8 +46,13 @@ class LaravelAutoMigrationsServiceProvider extends ServiceProvider
             $composer = $this->app['composer'];
             return new MakeMigrationCommand($creator, $composer);
         });
-        $this->app->bind(Handler::class,function(){
-            return new Handler(new MigrationReader(new Filesystem, new Parser), new ModelReader, new Writer, new ChangeDetector);
+        $this->app->bind(Handler::class, function () {
+            return new Handler(
+                new MigrationReader(new Filesystem, new Parser),
+                new ModelReader,
+                new Writer,
+                new ChangeDetector
+            );
         });
     }
 

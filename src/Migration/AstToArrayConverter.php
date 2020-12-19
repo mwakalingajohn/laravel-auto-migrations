@@ -3,10 +3,8 @@
 namespace MwakalingaJohn\LaravelAutoMigrations\Migration;
 
 use Illuminate\Support\Arr;
-use PhpParser\Node\Expr\Closure;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\Expression;
+use PhpParser\Node\Expr\{StaticCall, Closure};
+use PhpParser\Node\Stmt\{Class_, Expression};
 
 /**
  * Convert Abstract Syntax Tree to a normal array of table column and
@@ -66,7 +64,7 @@ class AstToArrayConverter
         foreach ($schemaObjects as $schemaObject) {
             $migrationProperties[] = $this->getSchemaProperties($schemaObject->expr);
         }
-        dump($migrationProperties);
+        // dump($migrationProperties);
     }
 
     /**
@@ -74,10 +72,11 @@ class AstToArrayConverter
      */
     private function getSchemaProperties($schemaObject)
     {
+        dump($schemaObject);
         $schemaMethod = $this->getSchemaMethod($schemaObject);
         $tableName = $this->getTableName($schemaObject);
         $properties = $this->getTableProperties($schemaObject);
-        return (object)["method"=>$schemaMethod, "table"=>$tableName, "properties"=>$properties];
+        return (object)["method" => $schemaMethod, "table" => $tableName, "properties" => $properties];
     }
 
     /**
@@ -101,7 +100,7 @@ class AstToArrayConverter
     {
         $name = $statement->expr->name->name;
         $args = $this->getStatementArgs($statement->expr);
-        return (object)["name"=>$name, "args"=>$args];
+        return (object)["name" => $name, "args" => $args];
     }
 
     /**
@@ -110,11 +109,11 @@ class AstToArrayConverter
     private function getStatementArgs($statement)
     {
         $args = [];
-        if(property_exists($statement, "args")){
+        if (property_exists($statement, "args")) {
             foreach ($statement->args as  $arg) {
                 // $args[] = collect($arg->value)->map(function($value){return dump("asdf",$value);});
                 $arg = collect($arg->value);
-                $args[]=$arg["value"]??null;
+                $args[] = $arg["value"] ?? null;
             }
         }
         return $args;
