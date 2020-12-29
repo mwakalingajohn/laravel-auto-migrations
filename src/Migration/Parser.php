@@ -49,10 +49,9 @@ class Parser{
      */
     public function parseFiles()
     {
-        $this->parseFile($this->files->first());
-        // $this->files->each(function($file){
-        //     $this->parseFile($file);
-        // });
+        $this->files->each(function($file){
+            $this->store[] = $this->parseFile($file);
+        });
     }
 
     /**
@@ -63,7 +62,7 @@ class Parser{
         $ast = $this->getAST(
             $this->getContents($file)
         );
-        $this->converter->convert($ast);
+        return $this->converter->convert($ast);
     }
 
     /**

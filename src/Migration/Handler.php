@@ -56,7 +56,6 @@ class Handler{
     public function readMigrations()
     {
         $this->migrationStore = $this->migrationReader->get();
-
     }
 
     /**
