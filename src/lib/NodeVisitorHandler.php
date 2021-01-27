@@ -176,7 +176,7 @@ class NodeVisitorHandler
         $this->setStatementResult([
             "name" => $this->nodeHandler->getName(),
             "args" => $this->nodeHandler->getArguments(),
-        ]);
+        ], true);
     }
 
     /**
