@@ -57,8 +57,7 @@ class Reader extends BaseReader
     {
         $directory = $this->getMigrationsDirectory();
 
-        $files = $this->fileNames($directory);
-
+        $files = $this->fileNames($directory); 
         return $this->useClassInstances ?
             $this->mapMigrationsToInstances($directory, $files) :
             $this->mapMigrationsToAbsolutePaths($directory, $files);

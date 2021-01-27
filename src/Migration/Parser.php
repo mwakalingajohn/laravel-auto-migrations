@@ -3,11 +3,13 @@
 namespace MwakalingaJohn\LaravelAutoMigrations\Migration;
 
 use Error;
+use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\Facades\App;
 use PhpParser\NodeDumper;
 use PhpParser\ParserFactory;
 
-class Parser{
+class Parser
+{
 
     /**
      * Parser object
@@ -25,13 +27,20 @@ class Parser{
     private $store;
 
     /**
+     * Laravel database migration repository
+     */
+    private DatabaseMigrationRepository $repository;
+
+    /**
      * The AST to array converter
      */
     private AstToArrayConverter $converter;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->parser = $this->getParser();
         $this->converter = $this->getConverter();
+        $this->repository = app('migration.repository');
     }
 
     /**
@@ -49,9 +58,42 @@ class Parser{
      */
     public function parseFiles()
     {
-        $this->files->each(function($file){
-            $this->store[] = $this->parseFile($file);
+        $this->files->each(function ($file) {
+            $this->store[] = $this->getTree($this->parseFile($file), $file);
         });
+    }
+
+    /**
+     * Get tree with other formatted attributes
+     */
+    public function getTree($tree, $file)
+    {
+        $migrationName = $this->getMigrationName($file);
+        $isMigrationRun = $this->isMigrationRun($migrationName);
+        return [
+            "migration" => $migrationName,
+            "is_run" => $isMigrationRun,
+            "tree" => $tree,
+        ];
+    }
+
+    /**
+     * Resolve the migration name from file name
+     */
+    public function getMigrationName($file)
+    {
+        $tempArr = explode("/", $file);
+        return explode(".", $tempArr[array_key_last($tempArr)])[0];
+    }
+
+    /**
+     * Check to see if migration is run
+     */
+    public function isMigrationRun($migrationName)
+    {
+        if ($this->repository->repositoryExists()) {
+            return in_array($migrationName, $this->repository->getRan());
+        }
     }
 
     /**
@@ -91,7 +133,7 @@ class Parser{
      */
     public function setFiles($files)
     {
-        if(is_array($files))
+        if (is_array($files))
             $this->files = collect($files);
         else
             $this->files = $files;
@@ -116,7 +158,8 @@ class Parser{
     /**
      * Get the AstToArrayConverter
      */
-    private function getConverter(){
+    private function getConverter()
+    {
         return App::make(AstToArrayConverter::class);
     }
 }

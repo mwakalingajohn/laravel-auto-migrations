@@ -5,7 +5,8 @@ namespace MwakalingaJohn\LaravelAutoMigrations\Migration;
 use MwakalingaJohn\LaravelAutoMigrations\Model\Reader as ModelReader;
 use MwakalingaJohn\LaravelAutoMigrations\Migration\Reader as MigrationReader;
 
-class Handler{
+class Handler
+{
 
     /**
      * Store the migration state
@@ -41,13 +42,13 @@ class Handler{
         MigrationReader $migrationReader,
         ModelReader $modelReader,
         Writer $writer,
-        ChangeDetector $changeDector) {
+        ChangeDetector $changeDector
+    ) {
 
         $this->migrationReader = $migrationReader;
         $this->modelReader = $modelReader;
         $this->changeDector = $changeDector;
         $this->writer = $writer;
-
     }
 
     /**
@@ -71,7 +72,6 @@ class Handler{
      */
     public function write()
     {
-
     }
 
     /**
@@ -79,7 +79,6 @@ class Handler{
      */
     public function detectChanges()
     {
-
     }
 
     /**
