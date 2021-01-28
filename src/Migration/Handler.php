@@ -56,7 +56,9 @@ class Handler
      */
     public function readMigrations()
     {
-        $this->migrationStore = $this->migrationReader->get();
+        $this->migrationStore = $this->getDatabaseMap(
+            $this->migrationReader->get()
+        );
     }
 
     /**
@@ -65,6 +67,14 @@ class Handler
     public function readModels()
     {
         $this->modelStore = $this->modelReader->get();
+    }
+
+    /**
+     * Get the database map
+     */
+    public function getDatabaseMap($migrationStore)
+    {
+        return (new DatabaseMapper)->mapFromMigrationStore($migrationStore);
     }
 
     /**

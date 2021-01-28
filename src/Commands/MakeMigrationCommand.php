@@ -72,7 +72,7 @@ class MakeMigrationCommand extends MigrationBaseCommand
 
     /**
      * Get the main migration handler
-     * - returs from the service container
+     * - returns from the service container
      */
     public function getHandler() : Handler
     {
